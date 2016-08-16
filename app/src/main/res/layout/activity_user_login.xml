@@ -9,8 +9,66 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="oaklabs.supportal.UserLogin">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userLoginLogo"
+        android:src="@drawable/oaklabslogo"
+        android:layout_marginBottom="45dp"
+        android:layout_above="@+id/usernameLine"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernameLine"
+        android:hint="@string/usernameLineHint"
+        android:layout_above="@+id/passwordLine"
+        android:layout_alignLeft="@+id/passwordLine"
+        android:layout_alignStart="@+id/passwordLine"
+        android:layout_alignRight="@+id/passwordLine"
+        android:layout_alignEnd="@+id/passwordLine" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwordLine"
+        android:layout_marginBottom="96dp"
+        android:hint="@string/passwordLineHint"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loginButton"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/forgotPassword"
+        android:layout_toStartOf="@+id/forgotPassword" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgotPassButton"
+        android:id="@+id/forgotPassword"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="@string/userLoginTitle"
+        android:textColor="#445377"
+        android:id="@+id/textView"
+        android:textSize="20dp"
+        android:layout_above="@+id/usernameLine"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
