@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adminPanel"
+        android:id="@+id/adminPanel"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/manageIssues"
+        android:layout_alignStart="@+id/manageIssues"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:layout_width="102dp"
+        android:layout_height="128dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/oaklabslogo"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/adminPanel"
+        android:layout_alignStart="@+id/adminPanel"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="View Current Issues"
+        android:id="@+id/currentIssues"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/submitIssue"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Manage Issues"
+        android:id="@+id/manageIssues"
+        android:layout_gravity="center_vertical"
+        android:layout_below="@+id/currentIssues"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Submit New Issue"
+        android:id="@+id/submitIssue"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/logOut"
+        android:id="@+id/logOut"
+        android:layout_marginBottom="25dp"
+        android:layout_above="@+id/submitIssue"
+        android:layout_alignLeft="@+id/manageAccount"
+        android:layout_alignStart="@+id/manageAccount"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/manageAccount"
+        android:id="@+id/manageAccount"
+        android:layout_above="@+id/logOut"
+        android:layout_toRightOf="@+id/adminPanel"
+        android:layout_toEndOf="@+id/adminPanel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/userName"
+        android:id="@+id/userName"
+        android:layout_above="@+id/manageAccount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:layout_width="102dp"
+        android:layout_height="128dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/userpic"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_alignRight="@+id/submitIssue"
+        android:layout_alignEnd="@+id/submitIssue" />
+
+</RelativeLayout>

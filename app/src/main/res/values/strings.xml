@@ -5,4 +5,8 @@
     <string name="forgotPassButton">Forgot Password?</string>
     <string name="userLoginTitle">Supportal</string>
     <string name="createAccountButton">Create Account</string>
+    <string name="userName">User : Admin</string>
+    <string name="manageAccount">Manage Account</string>
+    <string name="logOut">Log Out</string>
+    <string name="adminPanel">Admin Panel</string>
 </resources>
