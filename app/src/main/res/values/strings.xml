@@ -9,4 +9,8 @@
     <string name="manageAccount">Manage Account</string>
     <string name="logOut">Log Out</string>
     <string name="adminPanel">Admin Panel</string>
+    <string name="issueDescription">Description:</string>
+    <string name="highPriority">High Priority</string>
+    <string name="descriptionIssue">Description of Issue</string>
+    <string name="issueTitleText">Title</string>
 </resources>
