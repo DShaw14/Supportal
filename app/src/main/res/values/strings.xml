@@ -4,4 +4,5 @@
     <string name="loginButton">Login</string>
     <string name="forgotPassButton">Forgot Password?</string>
     <string name="userLoginTitle">Supportal</string>
+    <string name="createAccountButton">Create Account</string>
 </resources>
