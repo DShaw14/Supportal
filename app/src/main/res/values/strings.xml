@@ -13,4 +13,26 @@
     <string name="highPriority">High Priority</string>
     <string name="descriptionIssue">Description of Issue</string>
     <string name="issueTitleText">Title</string>
+    <string name="submitTitle">Submit Issue</string>
+    <string name="nameTxtView">Name:</string>
+    <string name="enterName">Enter your name</string>
+    <string name="issueTitle">Issue:</string>
+    <string name="issueTitleHint">Give a subject for your issue</string>
+    <string name="descriptionText">Description:</string>
+    <string name="descriptionHint">Give a description of the issue</string>
+    <string name="priorityText">High priority?</string>
+    <string name="submitTxt">Submit Issue</string>
+    <string name="welcomeTxt">Welcome!</string>
+    <string name="submitIssueHint">Submit an issue to the development team</string>
+    <string name="manageIssuesTitle">Manage Issues</string>
+    <string name="chooseIssueTxt">Choose a current issue:</string>
+    <string name="issueDescHint">*Issue description goes here*</string>
+    <string name="mainPageManage">Manage / View Issues</string>
+    <string name="accountCreationTxt">Account Creation</string>
+    <string name="desiredUsernameTxt">Desired Username:</string>
+    <string name="desiredUsernameEnter">Enter your desired username</string>
+    <string name="passwordTxt">Password:</string>
+    <string name="enterPasswordHint">Enter password</string>
+    <string name="reenterPassTxt">Confirm Password:</string>
+    <string name="createAcntPgBtn">Create Account</string>
 </resources>

@@ -4,100 +4,15 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageView3"
-            android:src="@drawable/oaklabslogo"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/submitIssue"
-            android:layout_alignStart="@+id/submitIssue"
-            android:layout_marginTop="10dp"
-            android:layout_alignBottom="@+id/textView4"
-            android:layout_marginLeft="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/userName"
-            android:id="@+id/textView5"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/description"
-            android:layout_toEndOf="@+id/description"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="25dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/manageAccount"
-            android:id="@+id/textView6"
-            android:layout_below="@+id/textView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="-105dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/logOut"
-            android:id="@+id/textView7"
-            android:layout_below="@+id/textView3"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignStart="@+id/textView2"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="-137dp" />
-
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageView5"
-            android:src="@drawable/userpic"
-            android:layout_alignBottom="@+id/textView4"
-            android:layout_alignRight="@+id/issueBack"
-            android:layout_alignEnd="@+id/issueBack"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="85dp" />
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/adminPanel"
-        android:id="@+id/adminPanel"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/manageIssues"
-        android:layout_alignStart="@+id/manageIssues"
-        android:layout_marginBottom="10dp" />
-
     <Button
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="View Current Issues"
-        android:id="@+id/currentIssues"
-        android:layout_gravity="center_vertical"
-        android:layout_below="@+id/submitIssue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
-
-    <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:text="Manage Issues"
+        android:text="@string/mainPageManage"
         android:id="@+id/manageIssues"
         android:layout_gravity="center_vertical"
-        android:layout_below="@+id/currentIssues"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/submitIssue" />
 
     <Button
         android:layout_width="350dp"
@@ -108,12 +23,15 @@
         android:layout_marginTop="120dp"
         android:layout_centerHorizontal="true" />
 
-
-
-
-
-
-
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcomeTxt"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/submitIssue"
+        android:layout_alignStart="@+id/submitIssue"
+        android:layout_marginTop="15dp"
+        android:textSize="35dp" />
 
 </RelativeLayout>

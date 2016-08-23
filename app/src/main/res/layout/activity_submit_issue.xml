@@ -3,184 +3,97 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageView3"
-            android:src="@drawable/oaklabslogo"
-            android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/submitIssue"
-            android:layout_alignStart="@+id/submitIssue"
-            android:layout_marginTop="10dp"
-            android:layout_alignBottom="@+id/textView4"
-            android:layout_marginLeft="15dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/userName"
-            android:id="@+id/textView5"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/description"
-            android:layout_toEndOf="@+id/description"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="25dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/manageAccount"
-            android:id="@+id/textView6"
-            android:layout_below="@+id/textView2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="-105dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/logOut"
-            android:id="@+id/textView7"
-            android:layout_below="@+id/textView3"
-            android:layout_alignLeft="@+id/textView2"
-            android:layout_alignStart="@+id/textView2"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="-137dp" />
-
-        <ImageView
-            android:layout_width="95dp"
-            android:layout_height="100dp"
-            android:id="@+id/imageView5"
-            android:src="@drawable/userpic"
-            android:layout_alignBottom="@+id/textView4"
-            android:layout_alignRight="@+id/issueBack"
-            android:layout_alignEnd="@+id/issueBack"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="85dp" />
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submitTitle"
+        android:id="@+id/submitTitle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="26dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/issueDescription"
-        android:id="@+id/description"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:textStyle="bold"
-        android:layout_above="@+id/descriptionIssue"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="@string/nameTxtView"
+        android:id="@+id/nameTextView"
+        android:layout_below="@+id/submitTitle"
+        android:layout_alignLeft="@+id/submitTitle"
+        android:layout_alignStart="@+id/submitTitle"
+        android:layout_marginTop="15dp" />
 
     <EditText
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:id="@+id/descriptionIssue"
-        android:text="@string/descriptionIssue"
-        android:gravity="top"
-        android:autoText="false"
-        android:editable="true"
-        android:inputType="text"
-        android:paddingLeft="0dp"
-        android:layout_above="@+id/highPriority"
-        android:layout_alignLeft="@+id/description"
-        android:layout_alignStart="@+id/description"
-        android:layout_alignRight="@+id/issueTitle"
-        android:layout_alignEnd="@+id/issueTitle" />
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:id="@+id/issueSubmit"
-        android:layout_alignTop="@+id/issueBack"
-        android:layout_alignLeft="@+id/highPriority"
-        android:layout_alignStart="@+id/highPriority"
-        android:layout_marginTop="-25dp" />
+        android:id="@+id/nameEditText"
+        android:layout_below="@+id/nameTextView"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_alignStart="@+id/nameTextView"
+        android:layout_marginTop="10dp"
+        android:hint="@string/enterName" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:id="@+id/issueBack"
-        android:layout_alignParentBottom="true"
+        android:text="@string/issueTitle"
+        android:id="@+id/issueTitleText"
+        android:layout_below="@+id/nameEditText"
+        android:layout_alignLeft="@+id/nameEditText"
+        android:layout_alignStart="@+id/nameEditText"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/issueTitleEdit"
+        android:layout_below="@+id/issueTitleText"
+        android:layout_alignLeft="@+id/issueTitleText"
+        android:layout_alignStart="@+id/issueTitleText"
+        android:layout_marginTop="10dp"
+        android:hint="@string/issueTitleHint" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descriptionText"
+        android:id="@+id/descriptionTxtView"
+        android:layout_below="@+id/issueTitleEdit"
+        android:layout_alignLeft="@+id/issueTitleEdit"
+        android:layout_alignStart="@+id/issueTitleEdit"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/descriptionEdit"
+        android:layout_below="@+id/descriptionTxtView"
+        android:layout_alignLeft="@+id/descriptionTxtView"
+        android:layout_alignStart="@+id/descriptionTxtView"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="34dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="25dp" />
+        android:layout_marginRight="5dp"
+        android:hint="@string/descriptionHint"
+        android:layout_marginTop="10dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/highPriority"
-        android:id="@+id/highPriority"
-        android:checked="true"
-        android:layout_above="@+id/issueSubmit"
-        android:layout_alignLeft="@+id/descriptionIssue"
-        android:layout_alignStart="@+id/descriptionIssue"
-        android:layout_marginBottom="25dp" />
+        android:text="@string/priorityText"
+        android:id="@+id/priorityChkBox"
+        android:layout_alignTop="@+id/submitBtn"
+        android:layout_alignLeft="@+id/descriptionEdit"
+        android:layout_alignStart="@+id/descriptionEdit" />
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/issueTitle"
-        android:layout_centerVertical="true"
-        android:text="@string/issueTitleText"
-        android:layout_alignRight="@+id/issueBack"
-        android:layout_alignEnd="@+id/issueBack"
-        android:layout_alignLeft="@+id/issueTitleText"
-        android:layout_alignStart="@+id/issueTitleText"
-        android:paddingLeft="0dp"
-        android:inputType="text" />
-
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Title:"
-        android:id="@+id/issueTitleText"
-        android:layout_above="@+id/issueTitle"
-        android:layout_alignLeft="@+id/description"
-        android:layout_alignStart="@+id/description"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Name:"
-        android:id="@+id/issueName"
-        android:textStyle="bold"
-        android:layout_above="@+id/issueNameText"
-        android:layout_alignLeft="@+id/issueNameText"
-        android:layout_alignStart="@+id/issueNameText" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/issueNameText"
-        android:text="Name"
-        android:paddingLeft="0dp"
-        android:layout_above="@+id/issueTitleText"
-        android:layout_alignLeft="@+id/issueTitleText"
-        android:layout_alignStart="@+id/issueTitleText" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Submit Issue"
-        android:id="@+id/submitIssueTitle"
-        android:layout_above="@+id/issueName"
-        android:layout_alignLeft="@+id/issueName"
-        android:layout_alignStart="@+id/issueName" />
+        android:text="@string/submitTxt"
+        android:id="@+id/submitBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/descriptionEdit"
+        android:layout_alignEnd="@+id/descriptionEdit"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp" />
 </RelativeLayout>

@@ -44,10 +44,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loginButton"
-        android:id="@+id/button"
+        android:id="@+id/loginButton"
         android:layout_above="@+id/createAccount"
         android:layout_toLeftOf="@+id/forgotPassword"
-        android:layout_toStartOf="@+id/forgotPassword" />
+        android:layout_toStartOf="@+id/forgotPassword"
+        android:onClick="buttonOnClick"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -55,11 +56,12 @@
         android:layout_height="wrap_content"
         android:text="@string/forgotPassButton"
         android:id="@+id/forgotPassword"
-        android:layout_alignTop="@+id/button"
+        android:layout_alignTop="@+id/loginButton"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
         android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginStart="25dp"
+        android:onClick="buttonOnClick"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -68,7 +70,8 @@
         android:text="@string/createAccountButton"
         android:id="@+id/createAccount"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="buttonOnClick"/>
 
     <TextView
         android:layout_width="wrap_content"
