@@ -1,9 +1,12 @@
 package oaklabs.supportal;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +19,7 @@ public class UserLogin extends Activity {
     Button loginBtn;
     Button forgotPassBtn;
     Button createAccountBtn;
+    private String forgotPassText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,36 @@ public class UserLogin extends Activity {
                 }
                 break;
             case R.id.forgotPassword:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Forgot Password?");
+                final EditText input = new EditText(this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                builder.setView(input);
 
+                builder.setPositiveButton("Send Recovery", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        forgotPassText = input.getText().toString();
+                        //Do something with this string via the Django API most likely
+                        Context context = getApplicationContext();
+                        CharSequence text = "An email will be sent to " + forgotPassText + " with password recovery procedures.";
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
                 break;
             case R.id.createAccount:
-
+                Intent create = new Intent(this, CreateAccount.class);
+                startActivity(create);
                 break;
         }
     }

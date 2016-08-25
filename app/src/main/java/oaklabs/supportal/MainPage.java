@@ -1,6 +1,7 @@
 package oaklabs.supportal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,19 +40,19 @@ public class MainPage extends Activity implements View.OnClickListener {
     public void onClick(View v){
         switch(v.getId()){
             case R.id.submitIssue:
-
-                break;
-            case R.id.currentIssues:
-
+                Intent submit = new Intent(this, SubmitIssue.class);
+                startActivity(submit);
                 break;
             case R.id.manageIssues:
-
+                Intent manage = new Intent(this, ManageIssues.class);
+                startActivity(manage);
                 break;
         }
     }
 
     public void logout(){
-
+        Intent logout = new Intent(this, UserLogin.class);
+        startActivity(logout);
     }
 
     public void manageAccount(){

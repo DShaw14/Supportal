@@ -35,4 +35,14 @@
     <string name="enterPasswordHint">Enter password</string>
     <string name="reenterPassTxt">Confirm Password:</string>
     <string name="createAcntPgBtn">Create Account</string>
+    <string name="passChangeTxt">Password reset:</string>
+    <string name="enterOldPass">Enter current password:</string>
+    <string name="currentPassHint">Enter your current password</string>
+    <string name="enterNewPass">Enter new desired password</string>
+    <string name="confirmPassHint">Confirm new password</string>
+    <string name="changePassBtn">Change Password</string>
+    <string name="changeEmailTxt">Change Email:</string>
+    <string name="oldEmailHint">Enter current email</string>
+    <string name="enterNewEmail">Enter new email</string>
+    <string name="emailChangeBtn">Change Email</string>
 </resources>
