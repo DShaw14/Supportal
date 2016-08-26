@@ -12,7 +12,8 @@
         android:layout_gravity="center_vertical"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/submitIssue" />
+        android:layout_below="@+id/submitIssue"
+        android:onClick="onClick"/>
 
     <Button
         android:layout_width="350dp"
@@ -21,13 +22,14 @@
         android:id="@+id/submitIssue"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="120dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/welcomeTxt"
-        android:id="@+id/textView2"
+        android:id="@+id/welcomeTxt"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/submitIssue"
         android:layout_alignStart="@+id/submitIssue"

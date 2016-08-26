@@ -40,25 +40,23 @@
         android:layout_alignEnd="@+id/manageIssuesTitle"
         android:layout_marginTop="5dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/issueDescription"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/issueDescHint"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Close Issue Ticket"
         android:id="@+id/closeTicketBtn"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/issueDescription"
-        android:layout_alignEnd="@+id/issueDescription" />
+        android:layout_toRightOf="@+id/issueDropdown"
+        android:layout_toEndOf="@+id/issueDropdown" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/issueDescHint"
+        android:id="@+id/issueManageDescription"
+        android:layout_below="@+id/issueDropdown"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textSize="18dp" />
 </RelativeLayout>

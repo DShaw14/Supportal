@@ -7,8 +7,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class MainPage extends Activity implements View.OnClickListener {
+
+    Button submitPageBtn;
+    Button managePageBtn;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -35,6 +39,9 @@ public class MainPage extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        submitPageBtn = (Button)findViewById(R.id.submitIssue);
+        managePageBtn = (Button)findViewById(R.id.manageIssues);
     }
 
     public void onClick(View v){
@@ -56,6 +63,7 @@ public class MainPage extends Activity implements View.OnClickListener {
     }
 
     public void manageAccount(){
-
+        Intent manage = new Intent(this, ManageUserAccount.class);
+        startActivity(manage);
     }
 }

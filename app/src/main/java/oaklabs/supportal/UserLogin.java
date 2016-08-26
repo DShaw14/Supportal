@@ -68,6 +68,7 @@ public class UserLogin extends Activity {
             case R.id.forgotPassword:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Forgot Password?");
+                builder.setMessage("Enter your username to be emailed recovery procedures");
                 final EditText input = new EditText(this);
                 input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                 builder.setView(input);
