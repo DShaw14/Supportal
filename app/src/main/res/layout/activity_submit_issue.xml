@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submitTitle"
+        android:id="@+id/submitTitle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="26dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nameTxtView"
+        android:id="@+id/nameTextView"
+        android:layout_below="@+id/submitTitle"
+        android:layout_alignLeft="@+id/submitTitle"
+        android:layout_alignStart="@+id/submitTitle"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameEditText"
+        android:layout_below="@+id/nameTextView"
+        android:layout_alignLeft="@+id/nameTextView"
+        android:layout_alignStart="@+id/nameTextView"
+        android:layout_marginTop="10dp"
+        android:hint="@string/enterName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/issueTitle"
+        android:id="@+id/issueTitleText"
+        android:layout_below="@+id/nameEditText"
+        android:layout_alignLeft="@+id/nameEditText"
+        android:layout_alignStart="@+id/nameEditText"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/issueTitleEdit"
+        android:layout_below="@+id/issueTitleText"
+        android:layout_alignLeft="@+id/issueTitleText"
+        android:layout_alignStart="@+id/issueTitleText"
+        android:layout_marginTop="10dp"
+        android:hint="@string/issueTitleHint" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/descriptionText"
+        android:id="@+id/descriptionTxtView"
+        android:layout_below="@+id/issueTitleEdit"
+        android:layout_alignLeft="@+id/issueTitleEdit"
+        android:layout_alignStart="@+id/issueTitleEdit"
+        android:layout_marginTop="15dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/descriptionEdit"
+        android:layout_below="@+id/descriptionTxtView"
+        android:layout_alignLeft="@+id/descriptionTxtView"
+        android:layout_alignStart="@+id/descriptionTxtView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="5dp"
+        android:hint="@string/descriptionHint"
+        android:layout_marginTop="10dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/priorityText"
+        android:id="@+id/priorityChkBox"
+        android:layout_alignTop="@+id/submitBtn"
+        android:layout_alignLeft="@+id/descriptionEdit"
+        android:layout_alignStart="@+id/descriptionEdit" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submitTxt"
+        android:id="@+id/submitBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/descriptionEdit"
+        android:layout_alignEnd="@+id/descriptionEdit"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp" />
+</RelativeLayout>
