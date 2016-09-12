@@ -3,6 +3,7 @@ package oaklabs.supportal;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -12,7 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
+/*
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackSession;
 import com.ullink.slack.simpleslackapi.SlackUser;
@@ -20,6 +21,7 @@ import com.ullink.slack.simpleslackapi.events.SlackMessagePosted;
 import com.ullink.slack.simpleslackapi.impl.SlackChatConfiguration;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import com.ullink.slack.simpleslackapi.listeners.SlackMessagePostedListener;
+*/
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
@@ -39,18 +41,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class SubmitIssue extends Activity {
+public class SubmitIssue extends Activity implements View.OnClickListener {
 
     EditText nameEdit;
     EditText titleEdit;
     EditText descriptionEdit;
+    Button submitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_issue);
-        SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
-        api.call(new SlackMessage("#random", "Zach", "Test Message"));
+        submitBtn = (Button)findViewById(R.id.submitBtn);
+        submitBtn.setOnClickListener(this);
+        /*SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
+        api.call(new SlackMessage("#random", "Zach", "Test Message"));*/
        /* HttpURLConnection connection;
         try {
             URL slackUrl = new URL("https://hooks.slack.com/services/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");
@@ -63,6 +68,11 @@ public class SubmitIssue extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+    }
+
+    public void onClick(View v){
+        SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
+        api.call(new SlackMessage("#random", "zmenken", "Test Message"));
     }
 
     /*public class Networking extends AsyncTask{

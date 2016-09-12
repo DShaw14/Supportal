@@ -95,5 +95,5 @@
         android:layout_alignRight="@+id/descriptionEdit"
         android:layout_alignEnd="@+id/descriptionEdit"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp" />
+        android:layout_marginRight="5dp"/>
 </RelativeLayout>
