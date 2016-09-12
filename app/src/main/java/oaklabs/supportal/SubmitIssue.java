@@ -6,39 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-/*
-import com.ullink.slack.simpleslackapi.SlackChannel;
-import com.ullink.slack.simpleslackapi.SlackSession;
-import com.ullink.slack.simpleslackapi.SlackUser;
-import com.ullink.slack.simpleslackapi.events.SlackMessagePosted;
-import com.ullink.slack.simpleslackapi.impl.SlackChatConfiguration;
-import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
-import com.ullink.slack.simpleslackapi.listeners.SlackMessagePostedListener;
-*/
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonPrimitive;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+import android.os.StrictMode;
 
 
 public class SubmitIssue extends Activity implements View.OnClickListener {
@@ -48,12 +16,15 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     EditText descriptionEdit;
     Button submitBtn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_issue);
         submitBtn = (Button)findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(this);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         /*SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
         api.call(new SlackMessage("#random", "Zach", "Test Message"));*/
        /* HttpURLConnection connection;
