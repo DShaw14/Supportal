@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.json.JSONObject;
+
 
 import com.ullink.slack.simpleslackapi.SlackChannel;
 import com.ullink.slack.simpleslackapi.SlackSession;
@@ -20,6 +20,23 @@ import com.ullink.slack.simpleslackapi.events.SlackMessagePosted;
 import com.ullink.slack.simpleslackapi.impl.SlackChatConfiguration;
 import com.ullink.slack.simpleslackapi.impl.SlackSessionFactory;
 import com.ullink.slack.simpleslackapi.listeners.SlackMessagePostedListener;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonPrimitive;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SubmitIssue extends Activity {
@@ -32,7 +49,8 @@ public class SubmitIssue extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_issue);
-
+        SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
+        api.call(new SlackMessage("#random", "Zach", "Test Message"));
        /* HttpURLConnection connection;
         try {
             URL slackUrl = new URL("https://hooks.slack.com/services/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");
@@ -56,8 +74,8 @@ public class SubmitIssue extends Activity {
         }
 
     }*/
-
-        private static String slackAPIKey = "xoxp-63069436370-63053733136-77700959316-30a9396b86";
+/*
+        private static String slackAPIKey = "api key";
         private static SlackSession slackSession;
         private static SubmitIssue simpleSlackAPITest;
 
@@ -74,7 +92,7 @@ public class SubmitIssue extends Activity {
 
         public static void run(String[] args) {
             System.out.println("SimpleSlackAPITest > run > Slack Init");
-        /* SLACK INIT */
+        /* SLACK INIT
             slackSession = SlackSessionFactory.createWebSocketSlackSession(slackAPIKey);
             try {
                 slackSession.connect();
@@ -130,4 +148,9 @@ public class SubmitIssue extends Activity {
             session.sendMessage(channel, "test message with name", null,
                     SlackChatConfiguration.getConfiguration().withName("Zach"));
         }
+        */
 }
+
+
+
+
