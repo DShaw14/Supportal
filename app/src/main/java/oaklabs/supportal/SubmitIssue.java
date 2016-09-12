@@ -57,7 +57,7 @@ public class SubmitIssue extends Activity {
 
     }*/
 
-        private static String slackAPIKey = "xoxp-63069436370-63053733136-77700959316-30a9396b86";
+        private static String slackAPIKey = "api key";
         private static SlackSession slackSession;
         private static SubmitIssue simpleSlackAPITest;
 
