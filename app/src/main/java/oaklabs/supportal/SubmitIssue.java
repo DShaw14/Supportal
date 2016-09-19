@@ -1,12 +1,29 @@
 package oaklabs.supportal;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
+import android.os.AsyncTask;
+
+//import java.io.BufferedReader;
+//import java.io.InputStreamReader;
+//import java.net.URL;
+import java.net.URLConnection;
+import java.net.MalformedURLException;
+import java.io.IOException;
+
+import java.net.*;
+import java.io.*;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.Reader;
 
 
 public class SubmitIssue extends Activity implements View.OnClickListener {
@@ -44,6 +61,55 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     public void onClick(View v){
         SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
         api.call(new SlackMessage("#random", "zmenken", "Test Message"));
+
+
+        String urlString = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
+        URL bb = null;
+
+        // handle Exception
+        try {
+            url = new URL(urlString);
+        } catch (MalformedURLException e) {
+            System.out.println("The URL is not valid.");
+            System.out.println(e.getMessage());
+        }
+
+        // print
+        if (url != null) {
+            System.out.println(url.toString());
+        }
+
+
+        bb = new URL(urlString);
+        URLConnection bbcon = bb.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(bbcon.getInputStream()));
+
+        String inputLine;
+
+        while ((inputLine = in.readLine()) != null){
+            System.out.println(inputLine);
+        }
+        in.close();
+
+        /*
+
+
+        String repolocation = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
+        URL bb = null;
+
+        bb = new URL(repolocation);
+        URLConnection bbcon = bb.openConnection();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                        bbcon.getInputStream()));
+
+        String inputLine;
+
+        while ((inputLine = in.readLine()) != null){
+            System.out.println(inputLine);
+        }
+        in.close();
+        */
     }
 
     /*public class Networking extends AsyncTask{
