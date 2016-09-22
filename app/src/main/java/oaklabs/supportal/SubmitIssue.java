@@ -61,7 +61,7 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     public void onClick(View v){
         SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
         api.call(new SlackMessage("#random", "zmenken", "Test Message"));
-
+        /*
 
         String urlString = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
         URL bb = null;
@@ -90,7 +90,7 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
             System.out.println(inputLine);
         }
         in.close();
-
+        */
         /*
 
 

@@ -19,16 +19,34 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'net.gpedro.integrations.slack:slack-webhook:1.2.1'
-    compile 'com.atlassian.bitbucket.server:bitbucket-jira-api:4.9.0'
+   /* compile 'com.atlassian.bitbucket.server:bitbucket-jira-api:4.9.0'
     compile 'com.atlassian.bitbucket.server:bitbucket-api:4.2.0'
     compile 'com.atlassian.bitbucket.server:bitbucket-git-api:4.2.0'
+    compile 'org.springframework.social:spring-social-github:1.0.0.M4'*/
+    compile group: 'org.vx68k.bitbucket', name: 'bitbucket-api-client', version: '4.0'
+    compile group: 'org.vx68k.bitbucket', name: 'bitbucket-api-client-example', version: '4.0'
+    compile group: 'org.vx68k.bitbucket', name: 'bitbucket-webhook', version: '1.0'
+    compile 'com.wirelust.bitbucket.client:bitbucket-api-client:1.0'
+
 }
 
 configurations {
     all*.exclude group: 'junit', module: 'junit'
+    all*.exclude group: 'commons-logging'
+    all {
+        exclude module: 'httpclient'
+        exclude module: 'httpcore'
+    }
+
 }
