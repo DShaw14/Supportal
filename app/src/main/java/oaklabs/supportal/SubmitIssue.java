@@ -7,23 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
 import android.os.AsyncTask;
-
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
-//import java.net.URL;
-import java.net.URLConnection;
-import java.net.MalformedURLException;
-import java.io.IOException;
-
-import java.net.*;
-import java.io.*;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.Reader;
+import org.vx68k.bitbucket.api.client.Client;
+import org.vx68k.bitbucket.api.client.Service;
+import org.vx68k.bitbucket.api.client.oauth.OAuthClient;
 
 
 public class SubmitIssue extends Activity implements View.OnClickListener {
@@ -32,7 +18,6 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     EditText titleEdit;
     EditText descriptionEdit;
     Button submitBtn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +46,7 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     public void onClick(View v){
         SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
         api.call(new SlackMessage("#random", "zmenken", "Test Message"));
+
         /*
 
         String urlString = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
