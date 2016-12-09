@@ -7,9 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.os.StrictMode;
 import android.os.AsyncTask;
-import org.vx68k.bitbucket.api.client.Client;
-import org.vx68k.bitbucket.api.client.Service;
-import org.vx68k.bitbucket.api.client.oauth.OAuthClient;
 import com.loopj.android.http.*;
 
 

@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import java.io.*;
 import java.util.*;
 import com.loopj.android.http.*;
 import org.json.*;
+
+import static java.lang.System.in;
 
 public class UserLogin extends Activity {
 
@@ -42,33 +46,54 @@ public class UserLogin extends Activity {
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
-                    URL url = new URL("https://127.0.0.1:8000/supportal/rest-auth/login");
-                    Map<String,Object> params = new LinkedHashMap<>();
-                    params.put("username", "testuser");
-                    params.put("password", "supportal2016");
-                    
-                    StringBuilder postData = new StringBuilder();
-                    for (Map.Entry<String,Object> param : params.entrySet()) {
-                        if (postData.length() != 0) postData.append('&');
-                        postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-                        postData.append('=');
-                        postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+                    //Intent main = new Intent(this, MainPage.class);
+                    //startActivity(main);
+                    HttpURLConnection urlConnection=null;
+                    try {
+                        //THIS PART IS OKAY
+                        URL url = new URL("http://127.0.0.1:8000/supportal/rest-auth/login/");
+                        urlConnection = (HttpURLConnection) url.openConnection();
+                        urlConnection.setDoOutput(true);
+                        urlConnection.setRequestMethod("POST");
+                        urlConnection.setRequestProperty("Content-Type", "application/json");
+
+                        Intent main = new Intent(this, MainPage.class);
+                        startActivity(main);
+
+                        //Create JSONObject here
+                        //Problem Part
+                        /*JSONObject json = new JSONObject();
+                        json.put("username", "testuser");
+                        json.put("password", "supportal2016");
+                        OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                        out.write(json.toString());
+                        out.flush();
+                        out.close();*/
+
+                        /*StringBuilder sb = new StringBuilder();
+                        int HttpResult = urlConnection.getResponseCode();
+                        if (HttpResult == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(
+                                    new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                            String line = null;
+                            while ((line = br.readLine()) != null) {
+                                sb.append(line + "\n");
+                            }
+                            br.close();
+                            System.out.println("" + sb.toString());
+                        } else {
+                            System.out.println(urlConnection.getResponseMessage());
+                        }*/
+                    }catch(MalformedURLException ex){
+                        ex.printStackTrace();
+                    }catch(IOException ex) {
+                        ex.printStackTrace();
+                    //}catch(JSONException ex){
+                    //    ex.printStackTrace();
+                    }finally{
+                        if(urlConnection!=null)
+                            urlConnection.disconnect();
                     }
-                    byte[] postDataBytes = postData.toString().getBytes("UTF-8");
-
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
-                    conn.setDoOutput(true);
-                    conn.getOutputStream().write(postDataBytes);
-
-                    Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-                    for (int c; (c = in.read()) >= 0;)
-                        System.out.print((char)c);
-                    //Intent intent = new Intent(this, MainPage.class);
-                    //startActivity(intent);
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();
