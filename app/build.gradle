@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "oaklabs.supportal"
@@ -37,6 +38,8 @@ dependencies {
     compile group: 'org.vx68k.bitbucket', name: 'bitbucket-webhook', version: '1.0'
     compile group: 'org.vx68k.bitbucket', name: 'bitbucket-webhook-parent', version: '1.0'
     compile group: 'org.vx68k.bitbucket', name: 'bitbucket-webhook-example', version: '1.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'cz.msebera.android:httpclient:4.3.6'
 }
 
 configurations {
@@ -46,5 +49,4 @@ configurations {
         exclude module: 'httpclient'
         exclude module: 'httpcore'
     }
-
 }
