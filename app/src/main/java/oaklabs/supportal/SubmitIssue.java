@@ -4,23 +4,42 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.os.StrictMode;
 import android.os.AsyncTask;
 import com.loopj.android.http.*;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
+
 
 public class SubmitIssue extends Activity implements View.OnClickListener {
 
-    EditText nameEdit;
     EditText titleEdit;
     EditText descriptionEdit;
     Button submitBtn;
+    CheckBox priority;
+    String slackParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_issue);
+        titleEdit = (EditText)findViewById(R.id.issueTitleEdit);
+        descriptionEdit = (EditText)findViewById(R.id.descriptionEdit);
+        priority = (CheckBox)findViewById(R.id.priorityChkBox);
         submitBtn = (Button)findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(this);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -42,9 +61,17 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     }
 
     public void onClick(View v){
-        SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
-        api.call(new SlackMessage("#random", "zmenken", "Test Message"));
+        if(titleEdit.getText().toString().trim().length() != 0 && descriptionEdit.getText().toString().trim().length() != 0) {
+            String issueTitle = titleEdit.getText().toString();
+            String issueDesc = descriptionEdit.getText().toString();
 
+            
+
+            if(priority.isChecked()) {
+                SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
+                api.call(new SlackMessage("#random", "supportal", "just created a high priority:\n" + "*" + issueTitle + "*" + "\n" + ">" + issueDesc));
+            }
+        }
         /*
 
         String urlString = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
@@ -94,6 +121,67 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
         }
         in.close();
         */
+    }
+
+    public String  performPostCall(String requestURL,
+                                   HashMap<String, String> postDataParams) {
+
+        URL url;
+        String response = "";
+        try {
+            url = new URL("https://api.bitbucket.org/1.0/repositories/shawdl/supportal2016test/issues");
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getPostDataString(postDataParams));
+
+            writer.flush();
+            writer.close();
+            os.close();
+            int responseCode=conn.getResponseCode();
+
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line=br.readLine()) != null) {
+                    response+=line;
+                }
+            }
+            else {
+                response="";
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException{
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+        for(Map.Entry<String, String> entry : params.entrySet()){
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 
     /*public class Networking extends AsyncTask{

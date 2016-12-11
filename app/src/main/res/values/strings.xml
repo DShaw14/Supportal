@@ -8,7 +8,6 @@
     <string name="userName">User : Admin</string>
     <string name="manageAccount">Manage Account</string>
     <string name="logOut">Log Out</string>
-    <string name="adminPanel">Admin Panel</string>
     <string name="issueDescription">Description:</string>
     <string name="highPriority">High Priority</string>
     <string name="descriptionIssue">Description of Issue</string>
@@ -24,10 +23,10 @@
     <string name="submitTxt">Submit Issue</string>
     <string name="welcomeTxt">Welcome!</string>
     <string name="submitIssueHint">Submit an issue to the development team</string>
-    <string name="manageIssuesTitle">Manage Issues</string>
+    <string name="manageIssuesTitle">View Issues</string>
     <string name="chooseIssueTxt">Choose a current issue:</string>
-    <string name="issueDescHint">*Issue description goes here*</string>
-    <string name="mainPageManage">Manage / View Issues</string>
+    <string name="issueDescHint"></string>
+    <string name="mainPageManage">View Issues</string>
     <string name="accountCreationTxt">Account Creation</string>
     <string name="desiredUsernameTxt">Desired Username:</string>
     <string name="desiredUsernameEnter">Enter your desired username</string>

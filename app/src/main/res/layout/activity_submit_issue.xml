@@ -12,36 +12,6 @@
         android:layout_marginTop="10dp"
         android:textSize="26dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nameTxtView"
-        android:id="@+id/nameTextView"
-        android:layout_below="@+id/submitTitle"
-        android:layout_alignLeft="@+id/submitTitle"
-        android:layout_alignStart="@+id/submitTitle"
-        android:layout_marginTop="15dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nameEditText"
-        android:layout_below="@+id/nameTextView"
-        android:layout_alignLeft="@+id/nameTextView"
-        android:layout_alignStart="@+id/nameTextView"
-        android:layout_marginTop="10dp"
-        android:hint="@string/enterName" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/issueTitle"
-        android:id="@+id/issueTitleText"
-        android:layout_below="@+id/nameEditText"
-        android:layout_alignLeft="@+id/nameEditText"
-        android:layout_alignStart="@+id/nameEditText"
-        android:layout_marginTop="15dp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,4 +66,14 @@
         android:layout_alignEnd="@+id/descriptionEdit"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/issueTitle"
+        android:id="@+id/issueTitleText"
+        android:layout_marginTop="52dp"
+        android:layout_below="@+id/submitTitle"
+        android:layout_alignLeft="@+id/submitTitle"
+        android:layout_alignStart="@+id/submitTitle" />
 </RelativeLayout>
