@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import java.net.HttpURLConnection;
 
 public class MainPage extends Activity implements View.OnClickListener {
 

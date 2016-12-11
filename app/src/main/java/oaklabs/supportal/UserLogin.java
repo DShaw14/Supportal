@@ -5,12 +5,21 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.net.*;
+import java.io.*;
+import java.util.*;
+import com.loopj.android.http.*;
+import org.json.*;
+
+import static java.lang.System.in;
 
 public class UserLogin extends Activity {
 
@@ -37,8 +46,54 @@ public class UserLogin extends Activity {
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
-                    Intent intent = new Intent(this, MainPage.class);
-                    startActivity(intent);
+                    //Intent main = new Intent(this, MainPage.class);
+                    //startActivity(main);
+                    HttpURLConnection urlConnection=null;
+                    try {
+                        //THIS PART IS OKAY
+                        URL url = new URL("http://127.0.0.1:8000/supportal/rest-auth/login/");
+                        urlConnection = (HttpURLConnection) url.openConnection();
+                        urlConnection.setDoOutput(true);
+                        urlConnection.setRequestMethod("POST");
+                        urlConnection.setRequestProperty("Content-Type", "application/json");
+
+                        Intent main = new Intent(this, MainPage.class);
+                        startActivity(main);
+
+                        //Create JSONObject here
+                        //Problem Part
+                        /*JSONObject json = new JSONObject();
+                        json.put("username", "testuser");
+                        json.put("password", "supportal2016");
+                        OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                        out.write(json.toString());
+                        out.flush();
+                        out.close();*/
+
+                        /*StringBuilder sb = new StringBuilder();
+                        int HttpResult = urlConnection.getResponseCode();
+                        if (HttpResult == HttpURLConnection.HTTP_OK) {
+                            BufferedReader br = new BufferedReader(
+                                    new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
+                            String line = null;
+                            while ((line = br.readLine()) != null) {
+                                sb.append(line + "\n");
+                            }
+                            br.close();
+                            System.out.println("" + sb.toString());
+                        } else {
+                            System.out.println(urlConnection.getResponseMessage());
+                        }*/
+                    }catch(MalformedURLException ex){
+                        ex.printStackTrace();
+                    }catch(IOException ex) {
+                        ex.printStackTrace();
+                    //}catch(JSONException ex){
+                    //    ex.printStackTrace();
+                    }finally{
+                        if(urlConnection!=null)
+                            urlConnection.disconnect();
+                    }
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();
