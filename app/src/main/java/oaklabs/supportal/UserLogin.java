@@ -16,6 +16,17 @@ import android.widget.Toast;
 import java.net.*;
 import java.io.*;
 import java.util.*;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.GsonBuilder;
 import com.loopj.android.http.*;
 import org.json.*;
 
@@ -29,6 +40,7 @@ public class UserLogin extends Activity {
     Button forgotPassBtn;
     Button createAccountBtn;
     private String forgotPassText;
+    RequestQueue loginQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +58,39 @@ public class UserLogin extends Activity {
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
-                    //Intent main = new Intent(this, MainPage.class);
-                    //startActivity(main);
-                    HttpURLConnection urlConnection=null;
+                    final String URL = "http://hurst.pythonanywhere.com/supportal/rest-auth/login";
+                    // Post params to be sent to the server
+                    loginQueue = Volley.newRequestQueue(this);
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("password", "supportal2016");
+                    params.put("username", "testuser");
+
+                    JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        VolleyLog.v("Response:%n %s", response.toString(4));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            VolleyLog.e("Error: ", error.getMessage());
+                        }
+                    });
+
+                    // add the request object to the queue to be executed
+                    loginQueue.add(req);
+
+                    Intent main = new Intent(this, MainPage.class);
+                    startActivity(main);
+                    /*HttpURLConnection urlConnection=null;
                     try {
                         //THIS PART IS OKAY
-                        URL url = new URL("http://127.0.0.1:8000/supportal/rest-auth/login/");
+                        URL url = new URL("http://hurst.pythonanywhere.com/supportal/rest-auth/login");
                         urlConnection = (HttpURLConnection) url.openConnection();
                         urlConnection.setDoOutput(true);
                         urlConnection.setRequestMethod("POST");
@@ -62,15 +101,15 @@ public class UserLogin extends Activity {
 
                         //Create JSONObject here
                         //Problem Part
-                        /*JSONObject json = new JSONObject();
+                        JSONObject json = new JSONObject();
                         json.put("username", "testuser");
                         json.put("password", "supportal2016");
                         OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
                         out.write(json.toString());
                         out.flush();
-                        out.close();*/
+                        out.close();
 
-                        /*StringBuilder sb = new StringBuilder();
+                        StringBuilder sb = new StringBuilder();
                         int HttpResult = urlConnection.getResponseCode();
                         if (HttpResult == HttpURLConnection.HTTP_OK) {
                             BufferedReader br = new BufferedReader(
@@ -83,17 +122,19 @@ public class UserLogin extends Activity {
                             System.out.println("" + sb.toString());
                         } else {
                             System.out.println(urlConnection.getResponseMessage());
-                        }*/
+                        }
                     }catch(MalformedURLException ex){
                         ex.printStackTrace();
                     }catch(IOException ex) {
                         ex.printStackTrace();
                     //}catch(JSONException ex){
                     //    ex.printStackTrace();
-                    }finally{
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } finally{
                         if(urlConnection!=null)
                             urlConnection.disconnect();
-                    }
+                    }*/
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();

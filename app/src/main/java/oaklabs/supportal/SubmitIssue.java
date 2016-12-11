@@ -1,29 +1,44 @@
 package oaklabs.supportal;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.os.StrictMode;
 import android.os.AsyncTask;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.*;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
-
 
 public class SubmitIssue extends Activity implements View.OnClickListener {
 
@@ -32,6 +47,7 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
     Button submitBtn;
     CheckBox priority;
     String slackParams;
+    RequestQueue issueQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,62 +81,80 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
             String issueTitle = titleEdit.getText().toString();
             String issueDesc = descriptionEdit.getText().toString();
 
-            
+            /*AccountManager am = AccountManager.get(this);
+            Bundle options = new Bundle();
+
+            am.getAuthToken(
+                    "shawdl",                       // Account retrieved using getAccountsByType()
+                    "issue",                        // Auth scope
+                    options,                        // Authenticator-specific options
+                    this,                           // Your activity
+                    new OnTokenAcquired(),          // Callback called when a token is successfully acquired
+                    new Handler(new OnError()));    // Callback called if an error occurs
+
+            URL url = null;
+            try {
+                url = new URL("https://api.bitbucket.org/1.0/repositories/shawdl/supportal2016test/issues");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.addRequestProperty("client_id", "djnug2AYYSwzudDYdj");
+                conn.addRequestProperty("client_secret", "K42BdNv8WXAD5erXt8ZK9SEycH39mQ5u");
+                conn.setRequestProperty("Authorization", "OAuth " + am);
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setRequestMethod("POST");
+
+                JSONObject issue = new JSONObject();
+
+                issue.put("title","Android Example");
+                issue.put("content", "This is the Android example");
+
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(issue.toString());
+                wr.flush();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }*/
+
+            issueQueue = Volley.newRequestQueue(this);
+
+            final String URL = "https://api.bitbucket.org/1.0/repositories/shawdl/supportal2016test/issues";
+            // Post params to be sent to the server
+            HashMap<String, String> params = new HashMap<String, String>();
+            String creds = String.format("shawdl:supportal2016","USERNAME","PASSWORD");
+            String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
+            params.put("Authorization", auth);
+            params.put("title", "Android test");
+            params.put("content", "test");
+
+            JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                VolleyLog.v("Response:%n %s", response.toString(4));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                }
+            });
+
+            // add the request object to the queue to be executed
+            issueQueue.add(req);
 
             if(priority.isChecked()) {
                 SlackApi api = new SlackApi("https://hooks.slack.com/services/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");
                 api.call(new SlackMessage("#random", "supportal", "just created a high priority:\n" + "*" + issueTitle + "*" + "\n" + ">" + issueDesc));
             }
         }
-        /*
-
-        String urlString = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
-        URL bb = null;
-
-        // handle Exception
-        try {
-            url = new URL(urlString);
-        } catch (MalformedURLException e) {
-            System.out.println("The URL is not valid.");
-            System.out.println(e.getMessage());
-        }
-
-        // print
-        if (url != null) {
-            System.out.println(url.toString());
-        }
-
-
-        bb = new URL(urlString);
-        URLConnection bbcon = bb.openConnection();
-        BufferedReader in = new BufferedReader(new InputStreamReader(bbcon.getInputStream()));
-
-        String inputLine;
-
-        while ((inputLine = in.readLine()) != null){
-            System.out.println(inputLine);
-        }
-        in.close();
-        */
-        /*
-
-
-        String repolocation = "https://api.bitbucket.org/2.0/repositories/zmenken/testing";
-        URL bb = null;
-
-        bb = new URL(repolocation);
-        URLConnection bbcon = bb.openConnection();
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(
-                        bbcon.getInputStream()));
-
-        String inputLine;
-
-        while ((inputLine = in.readLine()) != null){
-            System.out.println(inputLine);
-        }
-        in.close();
-        */
     }
 
     public String  performPostCall(String requestURL,
