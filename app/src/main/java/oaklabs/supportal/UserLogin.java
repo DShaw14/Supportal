@@ -30,6 +30,9 @@ import com.google.gson.GsonBuilder;
 import com.loopj.android.http.*;
 import org.json.*;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 import static java.lang.System.in;
 
 public class UserLogin extends Activity {
@@ -58,11 +61,28 @@ public class UserLogin extends Activity {
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
-                    // Post params to be sent to the server
+                    /*User loginUser = new User();
+                    loginUser.logUsername = username.getText().toString();
+                    loginUser.logPassword = password.getText().toString();
 
-                    Intent main = new Intent(this, MainPage.class);
-                    startActivity(main);
-                    /*loginQueue = Volley.newRequestQueue(this);
+                    ApiInterface api = APIClient.getClient().create(ApiInterface.class);
+
+                    Call<User> call = api.loginUser(loginUser);
+
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, retrofit2.Response<User> response) {
+                            String token = response.body();
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+
+                        }
+                    });*/
+
+
+                    loginQueue = Volley.newRequestQueue(this);
                     Map<String, String> params = new HashMap<String, String>();
 
                     StringRequest req = new StringRequest(Request.Method.POST,
@@ -78,7 +98,10 @@ public class UserLogin extends Activity {
                         };
                     };
                     // add the request object to the queue to be executed
-                    loginQueue.add(req);*/
+                    loginQueue.add(req);
+
+                    Intent main = new Intent(this, MainPage.class);
+                    startActivity(main);
 
                     /*HttpURLConnection urlConnection=null;
                     try {
