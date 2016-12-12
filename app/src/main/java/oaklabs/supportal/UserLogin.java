@@ -58,35 +58,28 @@ public class UserLogin extends Activity {
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
-                    final String URL = "http://hurst.pythonanywhere.com/supportal/rest-auth/login";
                     // Post params to be sent to the server
-                    loginQueue = Volley.newRequestQueue(this);
-                    HashMap<String, String> params = new HashMap<String, String>();
-                    params.put("password", "supportal2016");
-                    params.put("username", "testuser");
-
-                    JsonObjectRequest req = new JsonObjectRequest(URL, new JSONObject(params),
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    try {
-                                        VolleyLog.v("Response:%n %s", response.toString(4));
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            VolleyLog.e("Error: ", error.getMessage());
-                        }
-                    });
-
-                    // add the request object to the queue to be executed
-                    loginQueue.add(req);
 
                     Intent main = new Intent(this, MainPage.class);
                     startActivity(main);
+                    /*loginQueue = Volley.newRequestQueue(this);
+                    Map<String, String> params = new HashMap<String, String>();
+
+                    StringRequest req = new StringRequest(Request.Method.POST,
+                            "http://hurst.pythonanywhere.com/supportal/rest-auth/login",
+                            reqSuccessListener(),
+                            reqErrorListener()) {
+
+                        protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("Username", "shaw14");
+                            params.put("Password", "supportal2016");
+                            return params;
+                        };
+                    };
+                    // add the request object to the queue to be executed
+                    loginQueue.add(req);*/
+
                     /*HttpURLConnection urlConnection=null;
                     try {
                         //THIS PART IS OKAY
@@ -195,5 +188,23 @@ public class UserLogin extends Activity {
                 startActivity(create);
                 break;
         }
+    }
+
+    private Response.ErrorListener reqErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("LOGIN FAIL", error.getMessage());
+            }
+        };
+    }
+
+    private Response.Listener<String> reqSuccessListener() {
+        return new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("LOGIN SUCCESS", response);
+            }
+        };
     }
 }
