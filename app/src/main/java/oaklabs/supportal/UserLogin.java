@@ -30,6 +30,8 @@ import com.google.gson.GsonBuilder;
 import com.loopj.android.http.*;
 import org.json.*;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -82,7 +84,7 @@ public class UserLogin extends Activity {
                     });*/
 
 
-                    loginQueue = Volley.newRequestQueue(this);
+                    /*loginQueue = Volley.newRequestQueue(this);
                     Map<String, String> params = new HashMap<String, String>();
 
                     StringRequest req = new StringRequest(Request.Method.POST,
@@ -98,12 +100,9 @@ public class UserLogin extends Activity {
                         };
                     };
                     // add the request object to the queue to be executed
-                    loginQueue.add(req);
+                    loginQueue.add(req);*/
 
-                    Intent main = new Intent(this, MainPage.class);
-                    startActivity(main);
-
-                    /*HttpURLConnection urlConnection=null;
+                    HttpURLConnection urlConnection=null;
                     try {
                         //THIS PART IS OKAY
                         URL url = new URL("http://hurst.pythonanywhere.com/supportal/rest-auth/login");
@@ -120,7 +119,7 @@ public class UserLogin extends Activity {
                         JSONObject json = new JSONObject();
                         json.put("username", "testuser");
                         json.put("password", "supportal2016");
-                        OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                        OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream(), "utf-8");
                         out.write(json.toString());
                         out.flush();
                         out.close();
@@ -143,14 +142,14 @@ public class UserLogin extends Activity {
                         ex.printStackTrace();
                     }catch(IOException ex) {
                         ex.printStackTrace();
-                    //}catch(JSONException ex){
-                    //    ex.printStackTrace();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } finally{
                         if(urlConnection!=null)
                             urlConnection.disconnect();
-                    }*/
+                    }
+                    Intent main = new Intent(this, MainPage.class);
+                    startActivity(main);
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();

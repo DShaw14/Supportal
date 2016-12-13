@@ -1,8 +1,12 @@
 package oaklabs.supportal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -21,6 +25,28 @@ public class ManageIssues extends Activity {
     TextView display;
     RequestQueue issueQueue;
     String url ="https://api.bitbucket.org/1.0/repositories/shawdl/supportal2016test/issues";
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                logout();
+                return true;
+            case R.id.manage_account:
+                manageAccount();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,5 +83,15 @@ public class ManageIssues extends Activity {
             }
         });
         issueQueue.add(jsonRequest);
+    }
+
+    public void logout(){
+        Intent logout = new Intent(this, UserLogin.class);
+        startActivity(logout);
+    }
+
+    public void manageAccount(){
+        Intent manage = new Intent(this, ManageUserAccount.class);
+        startActivity(manage);
     }
 }

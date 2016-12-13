@@ -63,74 +63,33 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/confirmPassEdit"
-        android:password="true"
-        android:hint="@string/confirmPassHint"
-        android:layout_below="@+id/newPassEdit"
-        android:layout_alignLeft="@+id/newPassEdit"
-        android:layout_alignStart="@+id/newPassEdit"
-        android:layout_marginTop="15dp"
-        android:layout_alignRight="@+id/changePassBtn"
-        android:layout_alignEnd="@+id/changePassBtn"
-        android:inputType="textPassword" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/changePassBtn"
-        android:id="@+id/changePassBtn"
-        android:layout_below="@+id/confirmPassEdit"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/changeEmailTxt"
-        android:id="@+id/emailChangeTxt"
-        android:layout_below="@+id/changePassBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/oldEmailEdit"
-        android:hint="@string/oldEmailHint"
-        android:layout_below="@+id/emailChangeTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_alignRight="@+id/changePassBtn"
-        android:layout_alignEnd="@+id/changePassBtn"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/newEmailEdit"
-        android:layout_below="@+id/oldEmailEdit"
-        android:layout_alignLeft="@+id/oldEmailEdit"
-        android:layout_alignStart="@+id/oldEmailEdit"
-        android:layout_marginTop="15dp"
-        android:layout_alignRight="@+id/oldEmailEdit"
-        android:layout_alignEnd="@+id/oldEmailEdit"
         android:inputType="textEmailAddress"
         android:singleLine="false"
         android:selectAllOnFocus="false"
-        android:hint="@string/enterNewEmail" />
+        android:hint="@string/enterNewEmail"
+        android:layout_marginBottom="131dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/emailChangeBtn"
         android:id="@+id/changeEmailBtn"
-        android:layout_below="@+id/newEmailEdit"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp" />
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/changeEmailTxt"
+        android:id="@+id/emailChangeTxt"
+        android:layout_above="@+id/newEmailEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="17dp" />
 
 </RelativeLayout>

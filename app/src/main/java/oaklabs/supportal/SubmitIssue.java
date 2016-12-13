@@ -3,6 +3,7 @@ package oaklabs.supportal;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -302,6 +303,16 @@ public class SubmitIssue extends Activity implements View.OnClickListener {
                     SlackChatConfiguration.getConfiguration().withName("Zach"));
         }
         */
+
+    public void logout(){
+        Intent logout = new Intent(this, UserLogin.class);
+        startActivity(logout);
+    }
+
+    public void manageAccount(){
+        Intent manage = new Intent(this, ManageUserAccount.class);
+        startActivity(manage);
+    }
 }
 
 
