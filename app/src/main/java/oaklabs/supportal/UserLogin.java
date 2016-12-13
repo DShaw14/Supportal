@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.net.*;
 import java.io.*;
@@ -46,6 +47,8 @@ public class UserLogin extends Activity {
     Button createAccountBtn;
     private String forgotPassText;
     RequestQueue loginQueue;
+    RequestQueue passwordQueue;
+    TextView logoText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,52 +60,42 @@ public class UserLogin extends Activity {
         loginBtn = (Button)findViewById(R.id.loginButton);
         forgotPassBtn = (Button)findViewById(R.id.forgotPassword);
         createAccountBtn = (Button)findViewById(R.id.createAccount);
+        logoText = (TextView)findViewById(R.id.supportalTxtView);
     }
 
     public void buttonOnClick(View v){
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
-                    /*User loginUser = new User();
-                    loginUser.logUsername = username.getText().toString();
-                    loginUser.logPassword = password.getText().toString();
+                    loginQueue = Volley.newRequestQueue(this);
+                    JSONObject jsObj = new JSONObject();
 
-                    ApiInterface api = APIClient.getClient().create(ApiInterface.class);
+                    /*try {
+                        jsObj.put("username", username.getText().toString());
+                        jsObj.put("password", password.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }*/
 
-                    Call<User> call = api.loginUser(loginUser);
-
-                    call.enqueue(new Callback<User>() {
-                        @Override
-                        public void onResponse(Call<User> call, retrofit2.Response<User> response) {
-                            String token = response.body();
-                        }
-
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-
-                        }
-                    });*/
-
-
-                    /*loginQueue = Volley.newRequestQueue(this);
-                    Map<String, String> params = new HashMap<String, String>();
-
-                    StringRequest req = new StringRequest(Request.Method.POST,
-                            "http://hurst.pythonanywhere.com/supportal/rest-auth/login",
-                            reqSuccessListener(),
-                            reqErrorListener()) {
-
-                        protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                            Map<String, String> params = new HashMap<String, String>();
-                            params.put("Username", "shaw14");
-                            params.put("Password", "supportal2016");
-                            return params;
-                        };
-                    };
+                    JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                            (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/login", new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    logoText.setText("Response: " + response.toString());
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    error.printStackTrace();
+                                }
+                            });
                     // add the request object to the queue to be executed
-                    loginQueue.add(req);*/
+                    loginQueue.add(jsObjRequest);
 
-                    HttpURLConnection urlConnection=null;
+                    //Intent main = new Intent(this, MainPage.class);
+                    //startActivity(main);
+
+                    /*HttpURLConnection urlConnection=null;
                     try {
                         //THIS PART IS OKAY
                         URL url = new URL("http://hurst.pythonanywhere.com/supportal/rest-auth/login");
@@ -149,7 +142,7 @@ public class UserLogin extends Activity {
                             urlConnection.disconnect();
                     }
                     Intent main = new Intent(this, MainPage.class);
-                    startActivity(main);
+                    startActivity(main);*/
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();
@@ -188,13 +181,7 @@ public class UserLogin extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         forgotPassText = input.getText().toString();
-                        //Do something with this string via the Django API most likely
-                        Context context = getApplicationContext();
-                        CharSequence text = "An email will be sent to " + forgotPassText + " with password recovery procedures.";
-                        int duration = Toast.LENGTH_LONG;
-
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
+                        tryPasswordReset(forgotPassText);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -210,6 +197,35 @@ public class UserLogin extends Activity {
                 startActivity(create);
                 break;
         }
+    }
+
+    public void tryPasswordReset(String email){
+        passwordQueue = Volley.newRequestQueue(this);
+        JSONObject jsObj = new JSONObject();
+        try {
+            jsObj.put("email", "david14shaw@gmail.com");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/password/reset", jsObj, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Context context = getApplicationContext();
+                        CharSequence text = "An email will be sent to " + forgotPassText + " with password recovery procedures." + response.toString();
+                        int duration = Toast.LENGTH_LONG;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+        // add the request object to the queue to be executed
+        passwordQueue.add(jsObjRequest);
     }
 
     private Response.ErrorListener reqErrorListener() {
