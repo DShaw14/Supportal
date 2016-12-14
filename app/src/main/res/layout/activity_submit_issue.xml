@@ -76,4 +76,24 @@
         android:layout_below="@+id/submitTitle"
         android:layout_alignLeft="@+id/submitTitle"
         android:layout_alignStart="@+id/submitTitle" />
+
+    <TextView
+        android:text="Kind:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descriptionEdit"
+        android:layout_alignLeft="@+id/descriptionEdit"
+        android:layout_alignStart="@+id/descriptionEdit"
+        android:layout_marginTop="27dp"
+        android:id="@+id/kindTxt" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kindTxt"
+        android:layout_alignLeft="@+id/kindTxt"
+        android:layout_alignStart="@+id/kindTxt"
+        android:layout_marginTop="17dp"
+        android:id="@+id/kindSpinner" />
+
 </RelativeLayout>

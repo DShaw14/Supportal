@@ -60,6 +60,7 @@ public class MainPage extends Activity implements View.OnClickListener {
 
     public void logout(){
         Intent logout = new Intent(this, UserLogin.class);
+        logout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(logout);
     }
 

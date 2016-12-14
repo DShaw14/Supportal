@@ -67,25 +67,35 @@ public class UserLogin extends Activity {
         switch(v.getId()){
             case R.id.loginButton:
                 if(username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0){
+                    final Intent main = new Intent(this, MainPage.class);
                     loginQueue = Volley.newRequestQueue(this);
                     JSONObject jsObj = new JSONObject();
 
-                    /*try {
+                    try {
                         jsObj.put("username", username.getText().toString());
                         jsObj.put("password", password.getText().toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }*/
+                    }
 
                     JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                            (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/login", new Response.Listener<JSONObject>() {
+                            (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/login/", jsObj, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    logoText.setText("Response: " + response.toString());
+                                    startActivity(main);
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
+                                    int loginError = error.networkResponse.statusCode;
+                                    if(loginError == 400) {
+                                        Context context = getApplicationContext();
+                                        CharSequence text = "Invalid login credentials";
+                                        int duration = Toast.LENGTH_LONG;
+
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
+                                    }
                                     error.printStackTrace();
                                 }
                             });
@@ -94,55 +104,6 @@ public class UserLogin extends Activity {
 
                     //Intent main = new Intent(this, MainPage.class);
                     //startActivity(main);
-
-                    /*HttpURLConnection urlConnection=null;
-                    try {
-                        //THIS PART IS OKAY
-                        URL url = new URL("http://hurst.pythonanywhere.com/supportal/rest-auth/login");
-                        urlConnection = (HttpURLConnection) url.openConnection();
-                        urlConnection.setDoOutput(true);
-                        urlConnection.setRequestMethod("POST");
-                        urlConnection.setRequestProperty("Content-Type", "application/json");
-
-                        Intent main = new Intent(this, MainPage.class);
-                        startActivity(main);
-
-                        //Create JSONObject here
-                        //Problem Part
-                        JSONObject json = new JSONObject();
-                        json.put("username", "testuser");
-                        json.put("password", "supportal2016");
-                        OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream(), "utf-8");
-                        out.write(json.toString());
-                        out.flush();
-                        out.close();
-
-                        StringBuilder sb = new StringBuilder();
-                        int HttpResult = urlConnection.getResponseCode();
-                        if (HttpResult == HttpURLConnection.HTTP_OK) {
-                            BufferedReader br = new BufferedReader(
-                                    new InputStreamReader(urlConnection.getInputStream(), "utf-8"));
-                            String line = null;
-                            while ((line = br.readLine()) != null) {
-                                sb.append(line + "\n");
-                            }
-                            br.close();
-                            System.out.println("" + sb.toString());
-                        } else {
-                            System.out.println(urlConnection.getResponseMessage());
-                        }
-                    }catch(MalformedURLException ex){
-                        ex.printStackTrace();
-                    }catch(IOException ex) {
-                        ex.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } finally{
-                        if(urlConnection!=null)
-                            urlConnection.disconnect();
-                    }
-                    Intent main = new Intent(this, MainPage.class);
-                    startActivity(main);*/
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();
@@ -226,23 +187,5 @@ public class UserLogin extends Activity {
                 });
         // add the request object to the queue to be executed
         passwordQueue.add(jsObjRequest);
-    }
-
-    private Response.ErrorListener reqErrorListener() {
-        return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("LOGIN FAIL", error.getMessage());
-            }
-        };
-    }
-
-    private Response.Listener<String> reqSuccessListener() {
-        return new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("LOGIN SUCCESS", response);
-            }
-        };
     }
 }
