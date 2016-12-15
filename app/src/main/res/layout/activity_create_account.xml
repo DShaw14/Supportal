@@ -50,33 +50,13 @@
 
     <TextView
         android:text="Email:"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:id="@+id/createEmailTxt"
-        android:layout_alignBottom="@+id/createEmailEdit"
+        android:layout_below="@+id/desiredUsernameEnter"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="52dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/passwordTxt"
-        android:id="@+id/passwordTxt"
-        android:layout_marginBottom="18dp"
-        android:layout_above="@+id/passwordEnter"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/passwordEnter"
-        android:hint="@string/enterPasswordHint"
-        android:layout_marginBottom="56dp"
-        android:layout_above="@+id/createAcntBtn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="25dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -86,9 +66,55 @@
         android:id="@+id/createEmailEdit"
         android:contentDescription="Enter your first name"
         android:hint="Enter your email address"
-        android:layout_above="@+id/passwordTxt"
+        android:layout_alignTop="@+id/createEmailTxt"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="62dp" />
+        android:layout_marginTop="31dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/passwordTxt"
+        android:id="@+id/passwordTxt"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/createEmailEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:maxLines="1"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordEnter"
+        android:hint="@string/enterPasswordHint"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/passwordTxt"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:maxLines="1"/>
+
+    <TextView
+        android:text="Confirm Password:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:id="@+id/confirmPass"
+        android:layout_alignTop="@+id/passwordEnter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:maxLines="1"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/confirmPassEnter"
+        android:layout_below="@+id/confirmPass"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:hint="Confirm your password"
+        android:maxLines="1"/>
 
 </RelativeLayout>

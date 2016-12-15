@@ -12,75 +12,60 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="*Username will go here*"
         android:id="@+id/userAccountName"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textSize="24dp" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/passChangeTxt"
-        android:id="@+id/passwordResetTxt"
-        android:layout_below="@+id/userAccountName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:textSize="15dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/currentPassEdit"
-        android:layout_below="@+id/passwordResetTxt"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:hint="@string/currentPassHint"
+        android:text="@string/updateInfoBtn"
+        android:id="@+id/changeInfoBtn"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:password="true"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/newPassEdit"
-        android:layout_below="@+id/currentPassEdit"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_alignRight="@+id/currentPassEdit"
-        android:layout_alignEnd="@+id/currentPassEdit"
-        android:hint="@string/enterNewPass"
-        android:password="true"
-        android:inputType="textPassword" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newEmailEdit"
         android:inputType="textEmailAddress"
-        android:singleLine="false"
+        android:maxLines="1"
         android:selectAllOnFocus="false"
         android:hint="@string/enterNewEmail"
-        android:layout_marginBottom="131dp"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/changeInfoBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/emailChangeBtn"
-        android:id="@+id/changeEmailBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/lastNameEdit"
+        android:hint="Enter new last name"
+        android:layout_above="@+id/emailChangeTxt"
+        android:layout_toLeftOf="@+id/changeInfoBtn"
+        android:layout_toStartOf="@+id/changeInfoBtn"
+        android:layout_marginBottom="23dp" />
+
+    <TextView
+        android:text="Last Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/lastNameEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="First Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/firstNameAcntView"
+        android:layout_above="@+id/firstNameEdit" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,7 +74,48 @@
         android:id="@+id/emailChangeTxt"
         android:layout_above="@+id/newEmailEdit"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/firstNameEdit"
+        android:hint="Enter new first name"
+        android:layout_marginBottom="26dp"
+        android:layout_above="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="First Name:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userAccountName"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="17dp" />
+        android:layout_marginTop="21dp"
+        android:id="@+id/firstNameDisp"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/emailDisp"
+        android:maxLines="1"
+        android:text="Current Email:"
+        android:layout_below="@+id/lastNameDisp"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/lastNameDisp"
+        android:text="Last Name:"
+        android:layout_below="@+id/firstNameDisp"
+        android:textSize="18dp"/>
 
 </RelativeLayout>

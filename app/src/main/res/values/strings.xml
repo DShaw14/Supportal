@@ -24,7 +24,7 @@
     <string name="welcomeTxt">Welcome!</string>
     <string name="submitIssueHint">Submit an issue to the development team</string>
     <string name="manageIssuesTitle">View Issues</string>
-    <string name="chooseIssueTxt">Choose a current issue:</string>
+    <string name="chooseIssueTxt">List of current Issues:</string>
     <string name="issueDescHint"></string>
     <string name="mainPageManage">View Issues</string>
     <string name="accountCreationTxt">Account Creation</string>
@@ -43,5 +43,11 @@
     <string name="changeEmailTxt">Change Email:</string>
     <string name="oldEmailHint">Enter current email</string>
     <string name="enterNewEmail">Enter new email</string>
-    <string name="emailChangeBtn">Change Email</string>
+    <string name="updateInfoBtn">Update Information</string>
+    <string-array name="kinds_array">
+        <item>bug</item>
+        <item>task</item>
+        <item>proposal</item>
+        <item>enhancement</item>
+    </string-array>
 </resources>

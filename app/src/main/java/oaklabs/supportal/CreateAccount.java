@@ -1,18 +1,25 @@
 package oaklabs.supportal;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +29,9 @@ public class CreateAccount extends Activity {
     EditText username;
     EditText emailAddress;
     EditText password;
+    EditText confirm;
     Button createAccount;
-    RequestQueue createQueue;
+    RequestQueue accountQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,57 +42,48 @@ public class CreateAccount extends Activity {
         password = (EditText) findViewById(R.id.passwordEnter);
         emailAddress = (EditText) findViewById(R.id.createEmailEdit);
         createAccount = (Button) findViewById(R.id.createAcntBtn);
-        createQueue = Volley.newRequestQueue(this);
+        confirm = (EditText) findViewById(R.id.confirmPassEnter);
+        accountQueue = Volley.newRequestQueue(this);
+        final Intent returnToLogin = new Intent(this, UserLogin.class);
 
         createAccount.setOnClickListener(new View.OnClickListener() {
-                                             public void onClick(View v) {
-                                                 if (username.getText().toString().trim().length() != 0 &&
-                                                         password.getText().toString().trim().length() != 0 &&
-                                                         emailAddress.getText().toString().trim().length() != 0) {
-                                                     Map<String, String> params = new HashMap<String, String>();
+            public void onClick(View v) {
+                if (username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0 &&
+                        emailAddress.getText().toString().trim().length() != 0 && confirm.getText().toString().trim().length() != 0) {
+                    JSONObject jsObj = new JSONObject();
 
-                                                     StringRequest req = new StringRequest(Request.Method.POST,
-                                                             "http://hurst.pythonanywhere.com/supportal/rest-auth/registration",
-                                                             reqSuccessListener(),
-                                                             reqErrorListener()) {
+                    try {
+                        jsObj.put("username", username.getText().toString());
+                        jsObj.put("password1", password.getText().toString());
+                        jsObj.put("password2", confirm.getText().toString());
+                        jsObj.put("email", emailAddress.getText().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                                                         protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                                                             Map<String, String> params = new HashMap<String, String>();
-                                                             params.put("username", username.getText().toString());
-                                                             params.put("password1", password.getText().toString());
-                                                             params.put("password2", password.getText().toString());
-                                                             params.put("email", emailAddress.getText().toString());
-                                                             return params;
-                                                         }
+                    JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                            (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/registration/", jsObj, new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Account created";
+                                    int duration = Toast.LENGTH_LONG;
 
-                                                         ;
-                                                     };
-                                                     // add the request object to the queue to be executed
-                                                     createQueue.add(req);
-                                                 }
-                                             }
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
 
-                                             private Response.ErrorListener reqErrorListener() {
-                                                 return new Response.ErrorListener() {
-                                                     @Override
-                                                     public void onErrorResponse(VolleyError error) {
-                                                         Log.e("CREATE FAIL", error.getMessage());
-                                                     }
-                                                 };
-                                             }
-
-                                             private Response.Listener<String> reqSuccessListener() {
-                                                 return new Response.Listener<String>() {
-                                                     @Override
-                                                     public void onResponse(String response) {
-                                                         Log.e("CREATE SUCCESS", response);
-                                                     }
-                                                 };
-                                             }
-                                         }
-        );
+                                    startActivity(returnToLogin);
+                                }
+                            }, new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    error.printStackTrace();
+                                }
+                            });
+                    // add the request object to the queue to be executed
+                    accountQueue.add(jsObjRequest);
+                }
+            }
+        });
     }
 }
-
-
-

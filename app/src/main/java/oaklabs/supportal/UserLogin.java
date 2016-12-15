@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import android.webkit.CookieManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -49,6 +51,9 @@ public class UserLogin extends Activity {
     RequestQueue loginQueue;
     RequestQueue passwordQueue;
     TextView logoText;
+    String token;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,7 @@ public class UserLogin extends Activity {
         forgotPassBtn = (Button)findViewById(R.id.forgotPassword);
         createAccountBtn = (Button)findViewById(R.id.createAccount);
         logoText = (TextView)findViewById(R.id.supportalTxtView);
+        preferences = getSharedPreferences("oaklabs.supportal", Context.MODE_PRIVATE);
     }
 
     public void buttonOnClick(View v){
@@ -70,6 +76,8 @@ public class UserLogin extends Activity {
                     final Intent main = new Intent(this, MainPage.class);
                     loginQueue = Volley.newRequestQueue(this);
                     JSONObject jsObj = new JSONObject();
+                    final String user = username.getText().toString();
+                    final String pass = password.getText().toString();
 
                     try {
                         jsObj.put("username", username.getText().toString());
@@ -82,6 +90,14 @@ public class UserLogin extends Activity {
                             (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/login/", jsObj, new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
+                                    try {
+                                        token = response.getString("key");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    main.putExtra("USERNAME", user);
+                                    main.putExtra("TOKEN", token);
+                                    main.putExtra("PASS", pass);
                                     startActivity(main);
                                 }
                             }, new Response.ErrorListener() {
@@ -101,9 +117,6 @@ public class UserLogin extends Activity {
                             });
                     // add the request object to the queue to be executed
                     loginQueue.add(jsObjRequest);
-
-                    //Intent main = new Intent(this, MainPage.class);
-                    //startActivity(main);
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
                     Context context = getApplicationContext();
@@ -164,12 +177,12 @@ public class UserLogin extends Activity {
         passwordQueue = Volley.newRequestQueue(this);
         JSONObject jsObj = new JSONObject();
         try {
-            jsObj.put("email", "david14shaw@gmail.com");
+            jsObj.put("email", email);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/password/reset", jsObj, new Response.Listener<JSONObject>() {
+                (Request.Method.POST, "http://hurst.pythonanywhere.com/supportal/rest-auth/password/reset/", jsObj, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Context context = getApplicationContext();
