@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,19 +45,18 @@ public class CreateAccount extends Activity {
         createAccount = (Button) findViewById(R.id.createAcntBtn);
         confirm = (EditText) findViewById(R.id.confirmPassEnter);
         accountQueue = Volley.newRequestQueue(this);
-        final Intent returnToLogin = new Intent(this, UserLogin.class);
 
         createAccount.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (username.getText().toString().trim().length() != 0 && password.getText().toString().trim().length() != 0 &&
-                        emailAddress.getText().toString().trim().length() != 0 && confirm.getText().toString().trim().length() != 0) {
+                        emailAddress.getText().toString().trim().length() != 0 && confirm.getText().toString().trim().length() != 0 && confirm.getText().toString().equals(password.getText().toString())) {
                     JSONObject jsObj = new JSONObject();
 
                     try {
                         jsObj.put("username", username.getText().toString());
+                        jsObj.put("email", emailAddress.getText().toString());
                         jsObj.put("password1", password.getText().toString());
                         jsObj.put("password2", confirm.getText().toString());
-                        jsObj.put("email", emailAddress.getText().toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -71,19 +71,47 @@ public class CreateAccount extends Activity {
 
                                     Toast toast = Toast.makeText(context, text, duration);
                                     toast.show();
-
-                                    startActivity(returnToLogin);
+                                    finish();
                                 }
                             }, new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    error.printStackTrace();
+                                    String json = null;
+
+                                    NetworkResponse response = error.networkResponse;
+                                    if(response != null && response.data != null){
+                                        switch(response.statusCode){
+                                            case 400:
+                                                json = new String(response.data);
+                                                if(json.toLowerCase().contains("email")){
+                                                    displayMessage("Email is already in use");
+                                                }
+                                                if(json.toLowerCase().contains("password1") || json.toLowerCase().contains("password2")){
+                                                    displayMessage("Password is too short, must be 8 characters long");
+                                                }
+                                                if(json.toLowerCase().contains("username")){
+                                                    displayMessage("Username is already in use");
+                                                }
+                                        }
+                                    }
                                 }
                             });
                     // add the request object to the queue to be executed
                     accountQueue.add(jsObjRequest);
+                }else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "There are errors in the form, fill out empty fields and check passwords.";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
             }
         });
+    }
+
+    //Somewhere that has access to a context
+    public void displayMessage(String toastString){
+        Toast.makeText(this, toastString, Toast.LENGTH_LONG).show();
     }
 }
