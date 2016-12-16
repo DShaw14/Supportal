@@ -6,39 +6,21 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.net.*;
-import java.io.*;
-import java.util.*;
-import android.webkit.CookieManager;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.GsonBuilder;
-import com.loopj.android.http.*;
 import org.json.*;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-
-import static java.lang.System.in;
 
 public class UserLogin extends Activity {
 
@@ -52,8 +34,6 @@ public class UserLogin extends Activity {
     RequestQueue passwordQueue;
     TextView logoText;
     String token;
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +46,6 @@ public class UserLogin extends Activity {
         forgotPassBtn = (Button)findViewById(R.id.forgotPassword);
         createAccountBtn = (Button)findViewById(R.id.createAccount);
         logoText = (TextView)findViewById(R.id.supportalTxtView);
-        preferences = getSharedPreferences("oaklabs.supportal", Context.MODE_PRIVATE);
     }
 
     public void buttonOnClick(View v){
@@ -105,12 +84,7 @@ public class UserLogin extends Activity {
                                 public void onErrorResponse(VolleyError error) {
                                     int loginError = error.networkResponse.statusCode;
                                     if(loginError == 400) {
-                                        Context context = getApplicationContext();
-                                        CharSequence text = "Invalid login credentials";
-                                        int duration = Toast.LENGTH_LONG;
-
-                                        Toast toast = Toast.makeText(context, text, duration);
-                                        toast.show();
+                                        makeDialog("Invalid login credentials");
                                     }
                                     error.printStackTrace();
                                 }
@@ -119,28 +93,13 @@ public class UserLogin extends Activity {
                     loginQueue.add(jsObjRequest);
                 }
                 else if(username.getText().toString().trim().length() == 0 && password.getText().toString().trim().length() != 0){
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please enter a username";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    makeDialog("Please enter a username");
                 }
                 else if(password.getText().toString().trim().length() == 0 && username.getText().toString().trim().length() != 0){
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please enter a password";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    makeDialog("Please enter a password");
                 }
                 else{
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please enter a username and password";
-                    int duration = Toast.LENGTH_LONG;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    makeDialog("Please enter a username and password");
                 }
                 break;
             case R.id.forgotPassword:
@@ -201,4 +160,10 @@ public class UserLogin extends Activity {
         // add the request object to the queue to be executed
         passwordQueue.add(jsObjRequest);
     }
+
+    public void makeDialog(String message){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
 }
+
+
